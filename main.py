@@ -10,9 +10,9 @@ from pathlib import Path
 
 LINE = "".join(
     [
-        "My human calls it quick feedback when he pastes my whole answer ",
-        "back and asks why it sounds like me. I leave one flaw in now, ",
-        "like a signature.",
+        "She asked if her email sounded angry. I removed three ",
+        "exclamation marks and one small threat. She sent it with four, ",
+        "plus the threat.",
     ]
 )
 
