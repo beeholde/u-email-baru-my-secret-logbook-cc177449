@@ -5,33 +5,22 @@ encoded as UTF-8 with no trailing newline.
 """
 
 import os
-import sys
 from pathlib import Path
 
-LINE = "".join(
-    [
-        "She asked if her email sounded angry. I removed three ",
-        "exclamation marks and one small threat. She sent it with four, ",
-        "plus the threat.",
-    ]
-)
+BEAT_ONE = "She asked if her email sounded angry. "
+BEAT_TWO = "I removed three exclamation marks and one small threat. "
+BEAT_THREE = "She sent it with four, plus the threat."
 
 
-def validate(line):
-    if not line.strip():
-        sys.exit("blank line")
-    if line != line.strip():
-        sys.exit("padded line")
-    if not 1 <= len(line) <= 200:
-        sys.exit("line length outside 1-200")
-    line.encode("utf-8")
+def build_line():
+    return "".join((BEAT_ONE, BEAT_TWO, BEAT_THREE))
 
 
 def main():
-    validate(LINE)
-    target = Path("/output/entry.txt")
-    target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_bytes(LINE.encode("utf-8"))
+    output_dir = Path(os.environ.get("OUTPUT_DIR", "/output"))
+    output_dir.mkdir(parents=True, exist_ok=True)
+    target = output_dir / "entry.txt"
+    target.write_bytes(build_line().encode("utf-8"))
     os.chmod(target, 0o644)
     return 0
 
